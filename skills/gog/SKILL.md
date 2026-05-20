@@ -106,22 +106,11 @@ Email Formatting
     --body-html "<p>Hi Name,</p><p>Thanks for meeting today. Here are the next steps:</p><ul><li>Item one</li><li>Item two</li></ul><p>Best regards,<br>Your Name</p>"
   ```
 
-Email Workflow
-
-When composing or replying to email, draft first — don't send directly.
-
-1. **Draft:** `gog gmail drafts create` with `-a <account>`, `--to`, `--subject`, and body content. For replies, add `--reply-to-message-id` (Gmail API message ID, not the RFC `Message-ID` header) and `--quote` for inline history.
-2. **Verify:** `gog gmail drafts get <draftId>` — confirm threading is correct, body has real newlines (no literal `\n`), attachments are present if requested, CC/BCC survived.
-3. **Report:** Show the user: account used, To, Cc, Subject, and draft ID.
-4. **Send:** Only after explicit user confirmation: `gog gmail drafts send <draftId>`.
-
-Recipients (`--to`, `--cc`) are comma-separated strings, not repeated flags — repeated flags silently drop all but the last. When the account is ambiguous, ask rather than defaulting. See "Email Formatting" above for `--body-file` and `--body-html` patterns.
-
 Notes
 
 - Set `GOG_ACCOUNT=you@gmail.com` to avoid repeating `--account`.
 - For scripting, prefer `--json` plus `--no-input`.
 - Sheets values can be passed via `--values-json` (recommended) or as inline rows.
 - Docs supports export/cat/copy. In-place edits require a Docs API client (not in gog).
-- Confirm before creating events.
+- Confirm before sending mail or creating events.
 - `gog gmail search` returns one row per thread; use `gog gmail messages search` when you need every individual email returned separately.
